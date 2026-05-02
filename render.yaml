@@ -1,0 +1,39 @@
+# Render Blueprint — deploys both backend + frontend from one repo
+# https://render.com/docs/blueprint-spec
+
+services:
+  # ── Spring Boot Backend (Web Service, Docker) ──────────────────
+  - type: web
+    name: codebase-explainer-api
+    runtime: docker
+    region: oregon
+    plan: free
+    rootDir: backend
+    dockerfilePath: ./Dockerfile
+    healthCheckPath: /health
+    envVars:
+      - key: GROQ_API_KEY
+        sync: false
+      - key: GROQ_MODEL
+        value: llama-3.3-70b-versatile
+      - key: GITHUB_TOKEN
+        sync: false
+      - key: FRONTEND_URL
+        sync: false
+      - key: PORT
+        value: "8000"
+
+  # ── Next.js Frontend (Static Site) ─────────────────────────────
+  - type: web
+    name: codebase-explainer-ui
+    runtime: static
+    rootDir: frontend
+    buildCommand: npm install && npm run build
+    staticPublishPath: out
+    headers:
+      - path: /*
+        name: Cache-Control
+        value: public, max-age=0, must-revalidate
+    envVars:
+      - key: NEXT_PUBLIC_API_URL
+        sync: false

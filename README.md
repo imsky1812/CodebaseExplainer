@@ -4,7 +4,7 @@ Students and new developers struggle to understand large codebases. There's no c
 
 ## 💡 Solution
 
-CodeBase Explainer accepts a GitHub URL or file upload, parses the codebase using tree-sitter, builds a dependency graph, and uses Google Gemini to generate plain-English explanations of every file and the overall architecture.
+CodeBase Explainer accepts a GitHub URL or file upload, parses the codebase using tree-sitter, builds a dependency graph, and uses Groq (Llama 3) to generate plain-English explanations of every file and the overall architecture.
 
 ---
 
@@ -13,14 +13,14 @@ CodeBase Explainer accepts a GitHub URL or file upload, parses the codebase usin
 ```
 ┌─────────────┐     ┌──────────────────────────────────────────┐     ┌───────────────┐
 │             │     │              FastAPI Backend              │     │               │
-│   Next.js   │────▶│                                          │────▶│  Gemini LLM   │
+│   Next.js   │────▶│                                          │────▶│   Groq LLM    │
 │  Frontend   │◀────│  Routes ──▶ Agent ──▶ Engine ──▶ LLM    │◀────│   (AI API)    │
 │             │     │                                          │     │               │
-│  React Flow │     │  • Parser (tree-sitter + regex)          │     └───────────────┘
+│  React Flow │     │  • Parser (regex + imports resolver)     │     └───────────────┘
 │  Tailwind   │     │  • Graph Builder (dependency graph)      │
 │             │     │  • Entry Point Detector                  │     ┌───────────────┐
-└─────────────┘     │  • GitHub Service (fetch repos)          │────▶│  GitHub API   │
-                    └──────────────────────────────────────────┘     └───────────────┘
+│             │     │  • GitHub Service (fetch repos)          │────▶│  GitHub API   │
+└─────────────┘     └──────────────────────────────────────────┘     └───────────────┘
 ```
 
 ---
@@ -30,10 +30,10 @@ CodeBase Explainer accepts a GitHub URL or file upload, parses the codebase usin
 | Layer         | Technology                          |
 |---------------|-------------------------------------|
 | Backend       | FastAPI (Python)                    |
-| Core Engine   | tree-sitter (Python bindings)       |
+| Core Engine   | Regex + custom suffix resolver      |
 | Frontend      | Next.js (React) + Tailwind CSS      |
 | Graph Viz     | React Flow                          |
-| LLM           | Google Gemini (generativeai SDK)     |
+| LLM           | Groq (Llama 3.3)                    |
 | Auth/Secrets  | .env files (python-dotenv)           |
 | Testing       | pytest (backend)                     |
 
@@ -44,7 +44,7 @@ CodeBase Explainer accepts a GitHub URL or file upload, parses the codebase usin
 ### Prerequisites
 - Python 3.10+
 - Node.js 18+
-- A Gemini API key ([Get one here](https://aistudio.google.com/apikey))
+- A Groq API key ([Get one here](https://console.groq.com/keys))
 
 ### Backend Setup
 
@@ -54,7 +54,7 @@ pip install -r requirements.txt
 
 # Create .env from example
 cp .env.example .env
-# Edit .env and add your GEMINI_API_KEY
+# Edit .env and add your GROQ_API_KEY
 
 # Run the server
 uvicorn main:app --reload --port 8000
@@ -141,7 +141,7 @@ Update a prompt.
 
 ## ⚙️ Prompt Configuration
 
-All LLM prompts are stored in `backend/config/prompts.json`. Available prompts:
+All LLM prompts are stored in `backend/prompts.json`. Available prompts:
 
 | Key | Purpose |
 |-----|---------|

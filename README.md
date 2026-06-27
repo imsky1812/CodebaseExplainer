@@ -153,15 +153,5 @@ All LLM prompts are stored in `backend/prompts.json`. Available prompts:
 
 Prompts can be edited via the **⚙️ Prompt Editor** in the UI or the API.
 
----
 
-## 👥 Team
-
-| Name | Role |
-|------|------|
-| **Radhika** | Backend & AI Agent |
-| **Prateek** | Core Engine (Parser + Graph) |
-| **Priya** | Frontend |
-
----
 

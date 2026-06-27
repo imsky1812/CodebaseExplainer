@@ -1,7 +1,15 @@
 import io
 import logging
 import zipfile
+import os
+import sys
 from typing import Dict, Any
+
+# Ensure backend directory is in Python path for Vercel serverless function environment
+backend_dir = os.path.dirname(os.path.abspath(__file__))
+if backend_dir not in sys.path:
+    sys.path.insert(0, backend_dir)
+
 from fastapi import FastAPI, File, UploadFile, HTTPException, Depends, status
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel, Field

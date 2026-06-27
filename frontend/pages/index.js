@@ -131,6 +131,7 @@ export default function Home() {
               onAnalyze={handleAnalyze}
               isLoading={isLoading}
               loadingStep={loadingStep}
+              apiError={error}
             />
             {analysisData && (
               <FileTree

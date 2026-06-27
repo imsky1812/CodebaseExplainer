@@ -91,11 +91,11 @@ export default function DependencyGraph({
       //  - Red = circular dependency
       //  - Blue = has outgoing deps
       //  - Green = leaf (no deps)
-      let borderColor = "#4ade80"; // green (leaf)
+      let borderColor = "#10b981"; // success green (leaf)
       if (inCycle) {
-        borderColor = "#f87171"; // red (circular)
+        borderColor = "#ef4444"; // red (circular)
       } else if (hasDeps) {
-        borderColor = "#60a5fa"; // blue (has deps)
+        borderColor = "#6366f1"; // electric indigo (has deps)
       }
 
       // Compact label: just the filename path
@@ -110,10 +110,10 @@ export default function DependencyGraph({
               display: "flex",
               alignItems: "center",
               gap: "6px",
-              fontFamily: "'Inter', sans-serif",
+              fontFamily: "'Space Grotesk', sans-serif",
               fontSize: "12px",
               fontWeight: 600,
-              color: "#e8e8f0",
+              color: "#1e293b",
               whiteSpace: "nowrap",
             }}>
               {isEntry && <span style={{ fontSize: "11px" }}>⚡</span>}
@@ -123,23 +123,22 @@ export default function DependencyGraph({
           ),
         },
         style: {
-          background: isSelected
-            ? "rgba(40, 42, 58, 0.95)"
-            : "rgba(28, 30, 44, 0.92)",
-          color: "#e8e8f0",
+          background: "#e0e5ec",
+          color: "#1e293b",
           border: isSelected
-            ? `2.5px solid ${borderColor}`
-            : `1.5px solid ${borderColor}`,
+            ? `2px solid ${borderColor}`
+            : `1px solid ${borderColor}`,
           borderRadius: "20px",        // Pill shape like madge
           padding: "6px 16px",
           fontSize: "12px",
+          fontFamily: "'Space Grotesk', sans-serif",
           fontWeight: "600",
           minWidth: "auto",
           width: "auto",
           boxShadow: isSelected
-            ? `0 0 12px ${borderColor}55, 0 2px 8px rgba(0,0,0,0.4)`
-            : "0 2px 6px rgba(0,0,0,0.3)",
-          transition: "all 0.25s ease",
+            ? `inset 3px 3px 6px #a3b1c6, inset -3px -3px 6px #ffffff, 0 0 10px ${borderColor}44`
+            : "3px 3px 6px #a3b1c6, -3px -3px 6px #ffffff",
+          transition: "all 0.3s cubic-bezier(0.16, 1, 0.3, 1)",
           cursor: "pointer",
         },
       };
@@ -154,15 +153,15 @@ export default function DependencyGraph({
         type: "default",  // bezier curves like madge
         animated: false,
         style: {
-          stroke: isHighlighted ? "#a5b4fc" : "rgba(160, 165, 190, 0.45)",
-          strokeWidth: isHighlighted ? 2 : 1.2,
-          transition: "all 0.25s ease",
+          stroke: isHighlighted ? "#4f46e5" : "rgba(100, 116, 139, 0.25)",
+          strokeWidth: isHighlighted ? 2.2 : 1.1,
+          transition: "all 0.3s cubic-bezier(0.16, 1, 0.3, 1)",
         },
         markerEnd: {
           type: MarkerType.ArrowClosed,
-          color: isHighlighted ? "#a5b4fc" : "rgba(160, 165, 190, 0.5)",
-          width: 12,
-          height: 12,
+          color: isHighlighted ? "#4f46e5" : "rgba(100, 116, 139, 0.25)",
+          width: 10,
+          height: 10,
         },
       };
     });
@@ -193,18 +192,18 @@ export default function DependencyGraph({
       <div className="graph-empty" id="dependency-graph">
         <div className="graph-empty-content">
           <svg width="100" height="70" viewBox="0 0 100 70" fill="none">
-            <rect x="2" y="22" width="28" height="18" rx="9" stroke="#60a5fa" strokeWidth="1.5" fill="rgba(28,30,44,0.8)" />
-            <text x="16" y="34" fill="#e8e8f0" fontSize="7" fontWeight="600" textAnchor="middle">a.js</text>
-            <rect x="42" y="4" width="28" height="18" rx="9" stroke="#60a5fa" strokeWidth="1.5" fill="rgba(28,30,44,0.8)" />
-            <text x="56" y="16" fill="#e8e8f0" fontSize="7" fontWeight="600" textAnchor="middle">b.js</text>
-            <rect x="42" y="40" width="28" height="18" rx="9" stroke="#4ade80" strokeWidth="1.5" fill="rgba(28,30,44,0.8)" />
-            <text x="56" y="52" fill="#e8e8f0" fontSize="7" fontWeight="600" textAnchor="middle">c.js</text>
-            <line x1="30" y1="28" x2="42" y2="16" stroke="rgba(160,165,190,0.5)" strokeWidth="1.2" />
-            <line x1="30" y1="34" x2="42" y2="46" stroke="rgba(160,165,190,0.5)" strokeWidth="1.2" />
-            <polygon points="40,15 42,13 42,17" fill="rgba(160,165,190,0.5)" />
-            <polygon points="40,47 42,45 42,49" fill="rgba(160,165,190,0.5)" />
+            <rect x="2" y="22" width="28" height="18" rx="9" stroke="#6366f1" strokeWidth="1.5" fill="#e0e5ec" style={{ filter: "drop-shadow(3px 3px 6px #a3b1c6) drop-shadow(-3px -3px 6px #ffffff)" }} />
+            <text x="16" y="34" fill="#1e293b" fontSize="7" fontWeight="600" textAnchor="middle">a.js</text>
+            <rect x="42" y="4" width="28" height="18" rx="9" stroke="#6366f1" strokeWidth="1.5" fill="#e0e5ec" style={{ filter: "drop-shadow(3px 3px 6px #a3b1c6) drop-shadow(-3px -3px 6px #ffffff)" }} />
+            <text x="56" y="16" fill="#1e293b" fontSize="7" fontWeight="600" textAnchor="middle">b.js</text>
+            <rect x="42" y="40" width="28" height="18" rx="9" stroke="#10b981" strokeWidth="1.5" fill="#e0e5ec" style={{ filter: "drop-shadow(3px 3px 6px #a3b1c6) drop-shadow(-3px -3px 6px #ffffff)" }} />
+            <text x="56" y="52" fill="#1e293b" fontSize="7" fontWeight="600" textAnchor="middle">c.js</text>
+            <line x1="30" y1="28" x2="42" y2="16" stroke="rgba(100, 116, 139, 0.3)" strokeWidth="1.2" />
+            <line x1="30" y1="34" x2="42" y2="46" stroke="rgba(100, 116, 139, 0.3)" strokeWidth="1.2" />
+            <polygon points="40,15 42,13 42,17" fill="rgba(100, 116, 139, 0.3)" />
+            <polygon points="40,47 42,45 42,49" fill="rgba(100, 116, 139, 0.3)" />
           </svg>
-          <p>Analyze a repository to see the dependency graph</p>
+          <p style={{ color: "var(--text-secondary)", fontWeight: 500 }}>Analyze a repository to see the dependency graph</p>
         </div>
       </div>
     );
@@ -224,17 +223,17 @@ export default function DependencyGraph({
         maxZoom={2.5}
         attributionPosition="bottom-left"
       >
-        <Background color="rgba(255,255,255,0.03)" gap={30} size={1} />
+        <Background color="rgba(163, 177, 198, 0.35)" gap={30} size={1} />
         <Controls className="graph-controls" showInteractive={false} />
         <MiniMap
           nodeColor={(node) => {
             const inCycle = cycleFiles.has(node.id);
             const hasDeps = filesWithDeps.has(node.id);
-            if (inCycle) return "#f87171";
-            if (hasDeps) return "#60a5fa";
-            return "#4ade80";
+            if (inCycle) return "#ef4444";
+            if (hasDeps) return "#6366f1";
+            return "#10b981";
           }}
-          maskColor="rgba(10, 12, 20, 0.8)"
+          maskColor="rgba(224, 229, 236, 0.65)"
           className="graph-minimap"
         />
       </ReactFlow>
@@ -252,16 +251,16 @@ export default function DependencyGraph({
         )}
         <span className="graph-stat-sep">|</span>
         <span className="graph-legend-item">
-          <span className="graph-legend-dot" style={{ background: "#60a5fa" }} />
+          <span className="graph-legend-dot" style={{ background: "#6366f1" }} />
           has deps
         </span>
         <span className="graph-legend-item">
-          <span className="graph-legend-dot" style={{ background: "#4ade80" }} />
+          <span className="graph-legend-dot" style={{ background: "#10b981" }} />
           leaf
         </span>
         {cycles.length > 0 && (
           <span className="graph-legend-item">
-            <span className="graph-legend-dot" style={{ background: "#f87171" }} />
+            <span className="graph-legend-dot" style={{ background: "#ef4444" }} />
             circular
           </span>
         )}

@@ -1,12 +1,12 @@
 "use client";
 
 import { useState, useRef } from "react";
-import { Upload, GitBranch, Loader2, AlertCircle, ArrowRight } from "lucide-react";
+import { Upload, GitBranch, Loader2, AlertCircle, ArrowRight, Check } from "lucide-react";
 
 /**
  * InputPanel — Tab-based input for GitHub URL or ZIP upload.
  */
-export default function InputPanel({ onAnalyze, isLoading, loadingStep }) {
+export default function InputPanel({ onAnalyze, isLoading, loadingStep, apiError }) {
   const [activeTab, setActiveTab] = useState("github");
   const [githubUrl, setGithubUrl] = useState("");
   const [error, setError] = useState("");
@@ -161,7 +161,15 @@ export default function InputPanel({ onAnalyze, isLoading, loadingStep }) {
                   : ""
               }`}
             >
-              <div className="step-dot" />
+              <div className="step-indicator" style={{ width: 14, height: 14, display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
+                {loadingStep > i ? (
+                  <Check size={12} style={{ color: "var(--success)" }} />
+                ) : loadingStep === i ? (
+                  <Loader2 size={12} className="spinner" style={{ color: "var(--accent)" }} />
+                ) : (
+                  <div className="step-dot" />
+                )}
+              </div>
               <span>{step}</span>
             </div>
           ))}
@@ -169,10 +177,10 @@ export default function InputPanel({ onAnalyze, isLoading, loadingStep }) {
       )}
 
       {/* Error Display */}
-      {error && (
+      {(error || apiError) && (
         <div className="error-banner" id="error-display">
           <AlertCircle size={16} />
-          <span>{error}</span>
+          <span>{error || apiError}</span>
         </div>
       )}
     </div>

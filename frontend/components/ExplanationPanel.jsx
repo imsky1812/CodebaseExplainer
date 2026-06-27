@@ -13,17 +13,17 @@ import {
 
 /** Language badge colors */
 const LANG_BADGE = {
-  python: { bg: "#3776AB", label: "Python" },
-  javascript: { bg: "#F7DF1E", label: "JavaScript", textDark: true },
-  typescript: { bg: "#3178C6", label: "TypeScript" },
-  java: { bg: "#ED8B00", label: "Java" },
-  go: { bg: "#00ADD8", label: "Go" },
-  cpp: { bg: "#00599C", label: "C++" },
-  c: { bg: "#A8B9CC", label: "C" },
-  csharp: { bg: "#239120", label: "C#" },
-  ruby: { bg: "#CC342D", label: "Ruby" },
-  rust: { bg: "#DEA584", label: "Rust" },
-  unknown: { bg: "#6B7280", label: "Unknown" },
+  python: { bg: "rgba(55, 118, 171, 0.08)", color: "#0369a1", label: "Python" },
+  javascript: { bg: "rgba(240, 219, 79, 0.08)", color: "#854d0e", label: "JavaScript" },
+  typescript: { bg: "rgba(49, 120, 198, 0.08)", color: "#1d4ed8", label: "TypeScript" },
+  java: { bg: "rgba(237, 139, 0, 0.08)", color: "#c2410c", label: "Java" },
+  go: { bg: "rgba(0, 173, 216, 0.08)", color: "#0891b2", label: "Go" },
+  cpp: { bg: "rgba(0, 89, 156, 0.08)", color: "#4338ca", label: "C++" },
+  c: { bg: "rgba(168, 185, 204, 0.08)", color: "#334155", label: "C" },
+  csharp: { bg: "rgba(35, 145, 32, 0.08)", color: "#15803d", label: "C#" },
+  ruby: { bg: "rgba(204, 52, 45, 0.08)", color: "#b91c1c", label: "Ruby" },
+  rust: { bg: "rgba(222, 165, 132, 0.08)", color: "#be123c", label: "Rust" },
+  unknown: { bg: "rgba(107, 114, 128, 0.08)", color: "#475569", label: "Unknown" },
 };
 
 /**
@@ -97,7 +97,8 @@ export default function ExplanationPanel({
                   className="language-badge"
                   style={{
                     backgroundColor: lang.bg,
-                    color: lang.textDark ? "#000" : "#fff",
+                    color: lang.color || "#ffffff",
+                    border: `1px solid ${(lang.color || "#ffffff")}33`,
                   }}
                 >
                   {lang.label}

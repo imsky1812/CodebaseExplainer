@@ -13,17 +13,17 @@ import {
 
 /** Language → color mapping for badges */
 const LANG_COLORS = {
-  python: { bg: "#3776AB18", text: "#2d6192", label: "PY" },
-  javascript: { bg: "#F0DB4F18", text: "#9a8520", label: "JS" },
-  typescript: { bg: "#3178C618", text: "#2a66a8", label: "TS" },
-  java: { bg: "#ED8B0018", text: "#c07000", label: "JV" },
-  go: { bg: "#00ADD818", text: "#0090b3", label: "GO" },
-  cpp: { bg: "#00599C18", text: "#004980", label: "C++" },
-  c: { bg: "#5F6B7C18", text: "#4a5568", label: "C" },
-  csharp: { bg: "#23912018", text: "#1d7519", label: "C#" },
-  ruby: { bg: "#CC342D18", text: "#a82b25", label: "RB" },
-  rust: { bg: "#DEA58418", text: "#b8845a", label: "RS" },
-  unknown: { bg: "#6B728018", text: "#6B7280", label: "?" },
+  python: { bg: "rgba(55, 118, 171, 0.08)", text: "#0369a1", label: "PY" },
+  javascript: { bg: "rgba(240, 219, 79, 0.08)", text: "#854d0e", label: "JS" },
+  typescript: { bg: "rgba(49, 120, 198, 0.08)", text: "#1d4ed8", label: "TS" },
+  java: { bg: "rgba(237, 139, 0, 0.08)", text: "#c2410c", label: "JV" },
+  go: { bg: "rgba(0, 173, 216, 0.08)", text: "#0891b2", label: "GO" },
+  cpp: { bg: "rgba(0, 89, 156, 0.08)", text: "#4338ca", label: "C++" },
+  c: { bg: "rgba(95, 107, 124, 0.08)", text: "#334155", label: "C" },
+  csharp: { bg: "rgba(35, 145, 32, 0.08)", text: "#15803d", label: "C#" },
+  ruby: { bg: "rgba(204, 52, 45, 0.08)", text: "#b91c1c", label: "RB" },
+  rust: { bg: "rgba(222, 165, 132, 0.08)", text: "#be123c", label: "RS" },
+  unknown: { bg: "rgba(107, 114, 128, 0.08)", text: "#475569", label: "?" },
 };
 
 /**
